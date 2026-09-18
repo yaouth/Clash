@@ -3,7 +3,7 @@
 # ==========================================================
 proxy-providers:
 
-  Provider_E322C8:
+  Provider_Name:
     url: "机场地址"
     type: http
     interval: 86400
@@ -34,14 +34,14 @@ proxies:
 # 锚点：业务分流组
 #
 # 注意：
-# 这里故意不放 use: Provider_E322C8
+# 这里故意不放 use: Provider_Name
 #
 # 业务组只能看到：
 # 直连 / 地区 / 冷门 / 手动 / 自动 / 默认 / 拒绝
 #
 # 不直接暴露机场全部节点，避免业务组越权。
 # ==========================================================
-business: &business
+default: &default
   type: select
   proxies:
     - ➡️ 直连
@@ -67,7 +67,7 @@ region-test: &region-test
   tolerance: 50
   lazy: true
   use:
-    - Provider_E322C8
+    - Provider_Name
 
 
 # ==========================================================
@@ -80,61 +80,61 @@ proxy-groups:
   # ========================================================
 
   - name: 🍎 Apple
-    <<: *business
+    <<: *default
 
   - name: 🤖 AI
-    <<: *business
+    <<: *default
 
   - name: 📨 Telegram
-    <<: *business
+    <<: *default
 
   - name: 📞 即时通讯
-    <<: *business
+    <<: *default
 
   - name: 💬 社交媒体
-    <<: *business
+    <<: *default
 
   - name: 🎬 流媒体
-    <<: *business
+    <<: *default
 
   - name: 🎵 TikTok
-    <<: *business
+    <<: *default
 
   - name: 📸 Instagram
-    <<: *business
+    <<: *default
 
   - name: 🐦 X
-    <<: *business
+    <<: *default
 
   - name: 🧑‍💻 GitHub
-    <<: *business
+    <<: *default
 
   - name: 🚝 测速工具
-    <<: *business
+    <<: *default
 
   - name: 🎮 Steam
-    <<: *business
+    <<: *default
 
   - name: 👌 虚拟币
-    <<: *business
+    <<: *default
 
   - name: 🎨 Adobe
-    <<: *business
+    <<: *default
 
   - name: 🔎 Google
-    <<: *business
+    <<: *default
 
   - name: ☁️ Cloudflare
-    <<: *business
+    <<: *default
 
   - name: 🪟 Microsoft
-    <<: *business
+    <<: *default
 
 
   # ========================================================
   # 通用出口选择
   #
-  # 不直接 use Provider_E322C8
+  # 不直接 use Provider_Name
   # 通过下面的地区 / 自动 / 手动组间接使用节点
   # ========================================================
   - name: 🚀 手动选择
@@ -155,10 +155,10 @@ proxy-groups:
   # ========================================================
   # 默认策略
   #
-  # 这里不能继承 &business
+  # 这里不能继承 &default
   # 否则容易形成：
   #
-  # 🌐 默认 -> business -> 🌐 默认
+  # 🌐 默认 -> default -> 🌐 默认
   #
   # 的循环引用。
   # ========================================================
@@ -180,12 +180,12 @@ proxy-groups:
   # ========================================================
   # 手动节点
   #
-  # 唯一直接看到 Provider_E322C8 全部节点的手动组
+  # 唯一直接看到 Provider_Name 全部节点的手动组
   # ========================================================
   - name: 🧭 手动
     type: select
     use:
-      - Provider_E322C8
+      - Provider_Name
 
 
   # ========================================================
@@ -198,7 +198,7 @@ proxy-groups:
     tolerance: 50
     lazy: true
     use:
-      - Provider_E322C8
+      - Provider_Name
 
 
   # ========================================================
