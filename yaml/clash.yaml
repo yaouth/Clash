@@ -79,13 +79,34 @@ proxy-groups:
   # 应用 / 业务策略组
   # ========================================================
 
-  - name: 🍎 Apple
-    <<: *default
-
   - name: 🤖 AI
     <<: *default
 
+  - name: 🍎 Apple
+    <<: *default
+
+  - name: ☁️ Cloudflare
+    <<: *default
+
+  - name: 🧑‍💻 GitHub
+    <<: *default
+
+  - name: 🎮 Games
+    <<: *default
+
+  - name: 🔎 Google
+    <<: *default
+
+  - name: 🪟 Microsoft
+    <<: *default
+
+  - name: 🎬 Media
+    <<: *default
+
   - name: 📨 Telegram
+    <<: *default
+
+  - name: 📸 Instagram
     <<: *default
 
   - name: 📞 即时通讯
@@ -94,40 +115,13 @@ proxy-groups:
   - name: 💬 社交媒体
     <<: *default
 
-  - name: 🎬 流媒体
-    <<: *default
-
-  - name: 🎵 TikTok
-    <<: *default
-
-  - name: 📸 Instagram
-    <<: *default
-
-  - name: 🐦 X
-    <<: *default
-
-  - name: 🧑‍💻 GitHub
-    <<: *default
-
   - name: 🚝 测速工具
-    <<: *default
-
-  - name: 🎮 Steam
     <<: *default
 
   - name: 👌 虚拟币
     <<: *default
 
   - name: 🎨 Adobe
-    <<: *default
-
-  - name: 🔎 Google
-    <<: *default
-
-  - name: ☁️ Cloudflare
-    <<: *default
-
-  - name: 🪟 Microsoft
     <<: *default
 
 
@@ -137,7 +131,7 @@ proxy-groups:
   # 不直接 use Provider_Name
   # 通过下面的地区 / 自动 / 手动组间接使用节点
   # ========================================================
-  - name: 🚀 手动选择
+  - name: 🚀 手动
     type: select
     proxies:
       - ♻️ 自动
@@ -264,7 +258,7 @@ proxy-groups:
       - ♻️ 自动
       - 🧊 冷门
       - 🧭 手动
-      - 🚀 手动选择
+      - 🚀 手动
       - ➡️ 直连
 
 
@@ -285,47 +279,6 @@ proxy-groups:
     type: select
     proxies:
       - 🐟 漏网之鱼
-
-
-# ==========================================================
-# Rule Providers
-# ==========================================================
-rule-providers:
-
-  Custom_Direct_Domain:
-    type: http
-    behavior: domain
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.yaml"
-    path: ./ruleset/Custom_Direct_Domain.yaml
-    interval: 28800
-
-  Custom_Direct_Classical_IP:
-    type: http
-    behavior: classical
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_IP.yaml"
-    path: ./ruleset/Custom_Direct_Classical_IP.yaml
-    interval: 28800
-
-  Custom_Proxy_Domain:
-    type: http
-    behavior: domain
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.yaml"
-    path: ./ruleset/Custom_Proxy_Domain.yaml
-    interval: 28800
-
-  Custom_Proxy_Classical_IP:
-    type: http
-    behavior: classical
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical_IP.yaml"
-    path: ./ruleset/Custom_Proxy_Classical_IP.yaml
-    interval: 28800
-
-  Custom_Port_Direct:
-    type: http
-    behavior: classical
-    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Port_Direct.yaml"
-    path: ./ruleset/Custom_Port_Direct.yaml
-    interval: 28800
 
 
 # ==========================================================
@@ -398,27 +351,21 @@ rules:
   - GEOSITE,apple,🍎 Apple
 
   # ========================================================
-  # YouTube / Streaming
+  # Media
   # ========================================================
-  - GEOSITE,youtube,🎬 流媒体
-  - GEOSITE,netflix,🎬 流媒体
-  - GEOSITE,disney,🎬 流媒体
-  - GEOSITE,hbo,🎬 流媒体
-  # ========================================================
-  # TikTok
-  # ========================================================
-  - GEOSITE,tiktok,🎵 TikTok
-    #- GEOIP,tiktok,🎵 TikTok,no-resolve
+  - GEOSITE,youtube,🎬 Media
+  - GEOSITE,tiktok,🎬 Media
+  - GEOSITE,netflix,🎬 Media
+  - GEOSITE,crunchyroll,🎬 Media
+  - GEOSITE,disney,🎬 Media
+  - GEOSITE,hbo,🎬 Media
+  - GEOSITE,amazon,🎬 Media
+  - GEOSITE,spotify,🎬 Media
 
   # ========================================================
   # Instagram
   # ========================================================
   - GEOSITE,instagram,📸 Instagram
-
-  # ========================================================
-  # X / Twitter
-  # ========================================================
-  - GEOSITE,twitter,🐦 X
 
   # ========================================================
   # GitHub
@@ -432,9 +379,15 @@ rules:
   - GEOSITE,speedtest,🚝 测速工具
 
   # ========================================================
-  # Steam
+  # Games
   # ========================================================
-  - GEOSITE,steam,🎮 Steam
+  - GEOSITE,steam,🎮 Games
+  - GEOSITE,epicgames,🎮 Games
+  - GEOSITE,ea,🎮 Games
+  - GEOSITE,blizzard,🎮 Games
+  - GEOSITE,ubisoft,🎮 Games
+  - GEOSITE,playstation,🎮 Games
+  - GEOSITE,nintendo,🎮 Games
 
   # ========================================================
   # 虚拟币
@@ -452,6 +405,7 @@ rules:
   # 社交媒体
   # ========================================================
   - GEOSITE,category-social-media-!cn,💬 社交媒体
+  - GEOSITE,twitter,💬 社交媒体
 
   # ========================================================
   # Google
@@ -474,13 +428,13 @@ rules:
   # ========================================================
   # Aethersailor 自定义代理
   # ========================================================
-  - RULE-SET,Custom_Proxy_Domain,🚀 手动选择
-  - RULE-SET,Custom_Proxy_Classical_IP,🚀 手动选择
+  - RULE-SET,Custom_Proxy_Domain,🚀 手动
+  - RULE-SET,Custom_Proxy_Classical_IP,🚀 手动
 
   # ========================================================
   # GFW
   # ========================================================
-  - GEOSITE,gfw,🚀 手动选择
+  - GEOSITE,gfw,🚀 手动
 
   # ========================================================
   # 非标准端口
@@ -494,3 +448,44 @@ rules:
   # 最终兜底
   # ========================================================
   - MATCH,🐟 漏网之鱼
+
+
+# ==========================================================
+# Rule Providers
+# ==========================================================
+rule-providers:
+
+  Custom_Direct_Domain:
+    type: http
+    behavior: domain
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.yaml"
+    path: ./ruleset/Custom_Direct_Domain.yaml
+    interval: 28800
+
+  Custom_Direct_Classical_IP:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_IP.yaml"
+    path: ./ruleset/Custom_Direct_Classical_IP.yaml
+    interval: 28800
+
+  Custom_Proxy_Domain:
+    type: http
+    behavior: domain
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.yaml"
+    path: ./ruleset/Custom_Proxy_Domain.yaml
+    interval: 28800
+
+  Custom_Proxy_Classical_IP:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical_IP.yaml"
+    path: ./ruleset/Custom_Proxy_Classical_IP.yaml
+    interval: 28800
+
+  Custom_Port_Direct:
+    type: http
+    behavior: classical
+    url: "https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Port_Direct.yaml"
+    path: ./ruleset/Custom_Port_Direct.yaml
+    interval: 28800
