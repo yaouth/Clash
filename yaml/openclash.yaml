@@ -238,6 +238,7 @@ proxy-groups:
   - name: 🚀 手动
     type: select
     proxies:
+      - ♻️ 自动
       - 🇭🇰 香港
       - 🇹🇼 台湾
       - 🇯🇵 日本
@@ -245,7 +246,6 @@ proxy-groups:
       - 🇺🇸 美国
       - 🧊 冷门
       - 🧭 全部
-      - ♻️ 自动
       - DIRECT
 
   # 默认出口：允许进入完整节点池
@@ -276,11 +276,11 @@ proxy-groups:
   - name: 🔀 非标端口
     type: select
     proxies:
-      - 🐟 遵循规则
+      - 🪐 遵循规则
       - DIRECT
 
   # 将非标准端口流量重新交给漏网之鱼处理
-  - name: 🐟 遵循规则
+  - name: 🪐 遵循规则
     type: select
     proxies:
       - 🐟 漏网之鱼
