@@ -1,0 +1,782 @@
+# ==========================================================
+# Mihomo / Clash 配置
+# ==========================================================
+
+# =========================
+# 基础配置
+# =========================
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+
+# =========================
+# 机场节点订阅
+# =========================
+proxy-providers:
+  Kuromis:
+    type: http
+    url: "机场地址"
+    interval: 3600
+    proxy: DIRECT
+    path: ./providers/Kuromis.yaml
+
+    # 排除机场展示/说明/流量/到期等非节点项目
+    exclude-filter: '(?i)(流量|套餐|到期|剩余|重置|官网|网站|最新网址|防失联|失联|官网地址|公告|通知|TG|Telegram|电报|群|频道|说明|使用说明|QQ群|客服|工单|订阅|Expire|Traffic|Reset|Remaining|Official|Website)'
+
+    header:
+      User-Agent:
+        - clash-verge/v2.4.5
+
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+
+    override:
+      skip-cert-verify: true
+      udp: true
+
+# =========================
+# 策略组
+# =========================
+proxy-groups:
+
+  # --------------------------------------------------------
+  # 应用分流组
+  # 设计：
+  #   仅允许 DIRECT / 五大地区 / 冷门 / REJECT
+  #   不直接暴露 🧭 全部 / ♻️ 自动 / 🌐 默认
+  # --------------------------------------------------------
+
+  - name: 🤖 AI
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 🍎 Apple
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: ☁️ Cloudflare
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 🎮 Game
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 🧑‍💻 GitHub
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 🔎 Google
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 📸 Instagram
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 🎬 Media
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 🪟 Microsoft
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 📨 Telegram
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 🚝 Test
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 🎵 TikTok
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 📞 社交
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 👌 虚拟币
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  - name: 🎨 Adobe
+    type: select
+    proxies:
+      - DIRECT
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - REJECT
+
+  # --------------------------------------------------------
+  # 通用出口
+  # --------------------------------------------------------
+
+  - name: 🚀 手动
+    type: select
+    proxies:
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - 🧭 全部
+      - ♻️ 自动
+      - DIRECT
+
+  # 默认出口：允许进入完整节点池
+  - name: 🌐 默认
+    type: select
+    proxies:
+      - 🇭🇰 香港
+      - 🇹🇼 台湾
+      - 🇯🇵 日本
+      - 🇸🇬 新加坡
+      - 🇺🇸 美国
+      - 🧊 冷门
+      - 🧭 全部
+      - ♻️ 自动
+      - DIRECT
+
+  # 最终兜底策略组
+  - name: 🐟 漏网之鱼
+    type: select
+    proxies:
+      - 🌐 默认
+      - DIRECT
+      - ♻️ 自动
+      - 🧊 冷门
+      - 🚀 手动
+
+  # 非标准端口流量
+  - name: 🔀 非标端口
+    type: select
+    proxies:
+      - 🐟 遵循规则
+      - DIRECT
+
+  # 将非标准端口流量重新交给漏网之鱼处理
+  - name: 🐟 遵循规则
+    type: select
+    proxies:
+      - 🐟 漏网之鱼
+
+  # --------------------------------------------------------
+  # 完整节点池
+  # --------------------------------------------------------
+
+  # 全部机场节点
+  - name: 🧭 全部
+    type: select
+    use:
+      - Kuromis
+    filter: ".*"
+
+  # 全部机场节点自动测速
+  - name: ♻️ 自动
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 100
+    lazy: true
+    use:
+      - Kuromis
+    filter: ".*"
+
+  # --------------------------------------------------------
+  # 地区自动测速
+  # --------------------------------------------------------
+
+  - name: 🇭🇰 香港
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 100
+    lazy: true
+    use:
+      - Kuromis
+    filter: '(?i)(🇭🇰|香港|\bHK\b|hong[\s_-]?kong)'
+
+  - name: 🇹🇼 台湾
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 100
+    lazy: true
+    use:
+      - Kuromis
+    filter: '(?i)(🇹🇼|台湾|\bTW\b|taiwan|taipei|hinet)'
+
+  - name: 🇯🇵 日本
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 100
+    lazy: true
+    use:
+      - Kuromis
+    filter: '(?i)(🇯🇵|日本|\bJP\b|japan|tokyo|osaka)'
+
+  - name: 🇸🇬 新加坡
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 100
+    lazy: true
+    use:
+      - Kuromis
+    filter: '(?i)(🇸🇬|新加坡|\bSG\b|singapore)'
+
+  - name: 🇺🇸 美国
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 100
+    lazy: true
+    use:
+      - Kuromis
+    filter: '(?i)(🇺🇸|美国|\bUS\b|united[\s_-]?states|los[\s_-]?angeles|san[\s_-]?jose|seattle|new[\s_-]?york)'
+
+  # 冷门 = 排除五大主要地区后剩余的全部节点
+  - name: 🧊 冷门
+    type: url-test
+    url: https://www.gstatic.com/generate_204
+    interval: 300
+    tolerance: 100
+    lazy: true
+    use:
+      - Kuromis
+    filter: '(?i)^(?!.*(🇭🇰|香港|\bHK\b|hong[\s_-]?kong|🇯🇵|日本|\bJP\b|japan|tokyo|osaka|🇹🇼|台湾|\bTW\b|taiwan|taipei|hinet|🇸🇬|新加坡|\bSG\b|singapore|🇺🇸|美国|\bUS\b|united[\s_-]?states|los[\s_-]?angeles|san[\s_-]?jose|seattle|new[\s_-]?york)).*'
+
+
+# ==========================================================
+# 路由规则
+# ==========================================================
+# ==========================================================
+# 路由规则
+# ==========================================================
+
+rules:
+
+  # 1. Adobe
+  - RULE-SET,rs_adobe,🎨 Adobe
+
+  # 2. 私有地址：域名 + IP
+  - RULE-SET,rs_private_domain,DIRECT
+  - RULE-SET,rs_private_ip,DIRECT,no-resolve
+
+  # 3. 自定义直连规则
+  - RULE-SET,Custom_Direct_Domain,DIRECT
+  - RULE-SET,Custom_Direct_Classical_IP,DIRECT
+
+  # 4. 自定义代理规则
+  - RULE-SET,Custom_Proxy_Domain,🚀 手动
+  - RULE-SET,Custom_Proxy_Classical_IP,🚀 手动
+
+  # 5. 中国大陆：域名 + IP
+  - RULE-SET,rs_cn_domain,DIRECT
+  - RULE-SET,rs_cn_ip,DIRECT,no-resolve
+
+  # 6. 中国可用 / 游戏 / PT
+  - RULE-SET,rs_google_cn,DIRECT
+  - RULE-SET,rs_category_games_cn,DIRECT
+  - RULE-SET,rs_category_public_tracker,DIRECT
+
+  # 7. AI
+  - RULE-SET,rs_category_ai_not_cn,🤖 AI
+  - RULE-SET,rs_google_gemini,🤖 AI
+  - RULE-SET,rs_openai,🤖 AI
+
+  # 8. Apple
+  - RULE-SET,rs_apple,🍎 Apple
+
+  # 9. Cloudflare
+  - RULE-SET,rs_cloudflare,☁️ Cloudflare
+
+  # 10. 游戏
+  - RULE-SET,rs_steam,🎮 Game
+  - RULE-SET,rs_epicgames,🎮 Game
+  - RULE-SET,rs_ea,🎮 Game
+  - RULE-SET,rs_blizzard,🎮 Game
+  - RULE-SET,rs_ubisoft,🎮 Game
+  - RULE-SET,rs_playstation,🎮 Game
+  - RULE-SET,rs_nintendo,🎮 Game
+
+  # 11. GitHub
+  - RULE-SET,rs_github,🧑‍💻 GitHub
+
+  # 12. Google
+  - RULE-SET,rs_google,🔎 Google
+
+  # 13. Instagram
+  - RULE-SET,rs_instagram,📸 Instagram
+
+  # 14. 流媒体
+  - RULE-SET,rs_youtube,🎬 Media
+  - RULE-SET,rs_netflix,🎬 Media
+  - RULE-SET,rs_disney,🎬 Media
+  - RULE-SET,rs_hbo,🎬 Media
+  - RULE-SET,rs_amazon,🎬 Media
+  - RULE-SET,rs_spotify,🎬 Media
+
+  # 15. Microsoft
+  - RULE-SET,rs_microsoft,🪟 Microsoft
+
+  # 16. Telegram
+  - RULE-SET,rs_telegram,📨 Telegram
+
+  # 17. Speedtest
+  - RULE-SET,rs_category_speedtest,🚝 Test
+
+  # 18. TikTok
+  - RULE-SET,rs_tiktok,🎵 TikTok
+
+  # 19. 社交 / 即时通讯
+  - RULE-SET,rs_category_communication,📞 社交
+  - RULE-SET,rs_twitter,📞 社交
+  - RULE-SET,rs_category_social_not_cn,📞 社交
+
+  # 20. 虚拟币
+  - RULE-SET,rs_okx,👌 虚拟币
+  - RULE-SET,rs_binance,👌 虚拟币
+  - RULE-SET,rs_bybit,👌 虚拟币
+
+  # 21. GFW
+  - RULE-SET,rs_gfw,🚀 手动
+
+  # 22. 非标准端口
+  - RULE-SET,Custom_Port_Direct,🔀 非标端口
+
+  # 23. 最终兜底
+  # MATCH 不能也不应该改成 RULE-SET；它本身就是最终兜底匹配。
+  - MATCH,🐟 漏网之鱼
+
+
+# ==========================================================
+# Rule Provider
+# ==========================================================
+
+# ----------------------------------------------------------
+# 统一规则集下载锚点
+#
+# MetaCubeX meta 分支提供 Mihomo 原生 MRS。
+# domain：域名规则
+# ip：IP/CIDR 规则
+# ----------------------------------------------------------
+
+rule-anchor:
+  domain: &domain
+    type: http
+    behavior: domain
+    format: mrs
+    interval: 86400
+    proxy: DIRECT
+
+  ip: &ip
+    type: http
+    behavior: ipcidr
+    format: mrs
+    interval: 86400
+    proxy: DIRECT
+
+
+rule-providers:
+
+  # -------------------------
+  # 基础
+  # -------------------------
+  rs_adobe:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/adobe.mrs
+    path: ./providers/rs_adobe.mrs
+
+  rs_private_domain:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs
+    path: ./providers/rs_private_domain.mrs
+
+  rs_private_ip:
+    <<: *ip
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/private.mrs
+    path: ./providers/rs_private_ip.mrs
+
+  rs_cn_domain:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cn.mrs
+    path: ./providers/rs_cn_domain.mrs
+
+  rs_cn_ip:
+    <<: *ip
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs
+    path: ./providers/rs_cn_ip.mrs
+
+  rs_google_cn:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google-cn.mrs
+    path: ./providers/rs_google_cn.mrs
+
+  # 注意：原文件写成 category-games!cn，这里按你之前确定的正确语法修正为 @cn
+  rs_category_games_cn:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-games@cn.mrs
+    path: ./providers/rs_category_games_cn.mrs
+
+  rs_category_public_tracker:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-public-tracker.mrs
+    path: ./providers/rs_category_public_tracker.mrs
+
+  # -------------------------
+  # AI
+  # -------------------------
+  rs_category_ai_not_cn:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-ai-!cn.mrs
+    path: ./providers/rs_category_ai_not_cn.mrs
+
+  rs_google_gemini:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google-gemini.mrs
+    path: ./providers/rs_google_gemini.mrs
+
+  rs_openai:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/openai.mrs
+    path: ./providers/rs_openai.mrs
+
+  # -------------------------
+  # Apple / Cloudflare
+  # -------------------------
+  rs_apple:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple.mrs
+    path: ./providers/rs_apple.mrs
+
+  rs_cloudflare:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/cloudflare.mrs
+    path: ./providers/rs_cloudflare.mrs
+
+  # -------------------------
+  # 游戏
+  # -------------------------
+  rs_steam:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/steam.mrs
+    path: ./providers/rs_steam.mrs
+
+  rs_epicgames:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/epicgames.mrs
+    path: ./providers/rs_epicgames.mrs
+
+  rs_ea:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ea.mrs
+    path: ./providers/rs_ea.mrs
+
+  rs_blizzard:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/blizzard.mrs
+    path: ./providers/rs_blizzard.mrs
+
+  rs_ubisoft:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ubisoft.mrs
+    path: ./providers/rs_ubisoft.mrs
+
+  rs_playstation:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/playstation.mrs
+    path: ./providers/rs_playstation.mrs
+
+  rs_nintendo:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/nintendo.mrs
+    path: ./providers/rs_nintendo.mrs
+
+  # -------------------------
+  # GitHub / Google / Instagram
+  # -------------------------
+  rs_github:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs
+    path: ./providers/rs_github.mrs
+
+  rs_google:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs
+    path: ./providers/rs_google.mrs
+
+  rs_instagram:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/instagram.mrs
+    path: ./providers/rs_instagram.mrs
+
+  # -------------------------
+  # 流媒体
+  # -------------------------
+  rs_youtube:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs
+    path: ./providers/rs_youtube.mrs
+
+  rs_netflix:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs
+    path: ./providers/rs_netflix.mrs
+
+  rs_disney:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/disney.mrs
+    path: ./providers/rs_disney.mrs
+
+  rs_hbo:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/hbo.mrs
+    path: ./providers/rs_hbo.mrs
+
+  rs_amazon:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/amazon.mrs
+    path: ./providers/rs_amazon.mrs
+
+  rs_spotify:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/spotify.mrs
+    path: ./providers/rs_spotify.mrs
+
+  # -------------------------
+  # Microsoft / Telegram / Speedtest / TikTok
+  # -------------------------
+  rs_microsoft:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs
+    path: ./providers/rs_microsoft.mrs
+
+  rs_telegram:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs
+    path: ./providers/rs_telegram.mrs
+
+  rs_category_speedtest:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-speedtest.mrs
+    path: ./providers/rs_category_speedtest.mrs
+
+  rs_tiktok:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs
+    path: ./providers/rs_tiktok.mrs
+
+  # -------------------------
+  # 社交
+  # -------------------------
+  rs_category_communication:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-communication.mrs
+    path: ./providers/rs_category_communication.mrs
+
+  rs_twitter:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/twitter.mrs
+    path: ./providers/rs_twitter.mrs
+
+  rs_category_social_not_cn:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/category-social-media-!cn.mrs
+    path: ./providers/rs_category_social_not_cn.mrs
+
+  # -------------------------
+  # 虚拟币
+  # -------------------------
+  rs_okx:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/okx.mrs
+    path: ./providers/rs_okx.mrs
+
+  rs_binance:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/binance.mrs
+    path: ./providers/rs_binance.mrs
+
+  rs_bybit:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/bybit.mrs
+    path: ./providers/rs_bybit.mrs
+
+  # -------------------------
+  # GFW
+  # -------------------------
+  rs_gfw:
+    <<: *domain
+    url: https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs
+    path: ./providers/rs_gfw.mrs
+
+  # ========================================================
+  # 原有 Aethersailor Rule Provider
+  # ========================================================
+
+  Custom_Direct_Domain:
+    type: http
+    behavior: domain
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Domain.yaml
+    path: ./providers/Custom_Direct_Domain-domain-0eeac228cc645745.yaml
+    format: yaml
+    interval: 28800
+
+  Custom_Direct_Classical_IP:
+    type: http
+    behavior: classical
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct_Classical_IP.yaml
+    path: ./providers/Custom_Direct_Classical_IP-classical-ed5023c070be734c.yaml
+    format: yaml
+    interval: 28800
+
+  Custom_Proxy_Domain:
+    type: http
+    behavior: domain
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Domain.yaml
+    path: ./providers/Custom_Proxy_Domain-domain-4550d05f9c37fb80.yaml
+    format: yaml
+    interval: 28800
+
+  Custom_Proxy_Classical_IP:
+    type: http
+    behavior: classical
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical_IP.yaml
+    path: ./providers/Custom_Proxy_Classical_IP-classical-d4bee5f66bad33e9.yaml
+    format: yaml
+    interval: 28800
+
+  Custom_Port_Direct:
+    type: http
+    behavior: classical
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Port_Direct.yaml
+    path: ./providers/Custom_Port_Direct-classical-7ee9d14c928a5f30.yaml
+    format: yaml
+    interval: 28800
