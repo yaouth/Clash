@@ -509,7 +509,7 @@ rule-providers:
   Custom_Proxy_Classical_IP:
     type: http
     behavior: classical
-    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical_IP-classical-d4bee5f66bad33e9.yaml
+    url: https://testingcf.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy_Classical_IP.yaml
     path: ./providers/Custom_Proxy_Classical_IP-classical-d4bee5f66bad33e9.yaml
     format: yaml
     interval: 28800
